@@ -15,7 +15,12 @@ function Extension() {
   }
 
   const freeShippingThreshold = shopify.settings.value.free_shipping_threshold as number; // this is populated from the settings page
-  const remaining = Math.ceil((freeShippingThreshold - subtotal) * 100) / 100; // x.001 -> x.01
+  const remaining = Math.ceil((freeShippingThreshold - subtotal) * 100) / 100;
+  // example computation for the remaining:
+  // step 1: 50 - 34.999 = 15.001 - raw difference — the 0.001 is floating-point                                                        
+  // step 2: 15.001 * 100 = 1500.1 - shift 2 decimal places right                                                                                 
+  // step 3: Math.ceil(1500.1) = 1501 round UP to nearest integer                                                                                  
+  // step 4: 1501 / 100 = 15.01 shift back → clean 2-decimal result     
 
   if (remaining <= 0) {
     return (
