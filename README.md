@@ -52,6 +52,8 @@ npm run dev:blocks
 npm run build
 ```
 
+The `build:blocks` script iterates over every subdirectory inside `extensions/theme-extension/src/`, extracts the folder name as the `BLOCK` environment variable, and runs a Vite build for each one using the shared `vite.block.config.js` config. This allows each block to be built separately while reusing a single Vite configuration.
+
 ### Deploy
 
 ```shell
